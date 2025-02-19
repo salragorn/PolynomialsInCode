@@ -22,7 +22,10 @@ class monomial:
         elif len(args) == 2:
             self.coefficient, self.exponent = args
     def __str__(self):
-        return str(self.coefficient) + "X^" + str(self.exponent)
+        if self.coefficient < 0:
+            return str(self.coefficient) + "X^" + str(self.exponent)
+        else:
+            return '+' + str(self.coefficient) + "X^" + str(self.exponent)
 
     def evaluatePoint(self, point):
         value = self.coefficient * pow(point, self.exponent)
@@ -90,7 +93,7 @@ while pointer != "end":
     if pointer != "solve":
         print("f(" + pointer + ")= " + str(poly.evaluatePoint(float(pointer))))
         print("f'(" + pointer + ")= " + str(poly.derivativePoint(float(pointer))))   
-        print("F(" + pointer + ")= " + str(poly.integrated.evaluatePoint(float(pointer))))
+        print("F(" + pointer + ")= " + str(poly.integrated.evaluatePoint(float(pointer))) + " ,Assuming the integration constant is zero")
     else:
         print("Which solving algorithm would you like to use? enter newton for newton's method and bisection for bisection method.")
         method = input()
